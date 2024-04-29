@@ -1,2 +1,12 @@
 欢迎使用: {{ .Chart.Name }}应用.
-祝您在使用过程中, 玩得愉快, 请访问: {{ .Values.IngressDomain }}.
+祝您在使用过程中, 玩得愉快, 请访问接口: 
+++++++++++++> 健康检测 <++++++++++++++
+{{ .Values.IngressDomain }}/test
++++++++> {name}路径参数(任意) <+++++++
+{{ .Values.IngressDomain }}/hello/{name}
+++++++++> {id}路径参数(任意) <++++++++
+{{ .Values.IngressDomain }}/tasks/{id}
+++++++> book.yaml内容json格式 <+++++++
+{{ .Values.IngressDomain }}/books/info
+++++> {item}路径参数(name|author) <+++
+{{ .Values.IngressDomain }}/books/{item}
