@@ -1,20 +1,20 @@
 ### k8s.demo
 
-描述:
-====
+项目描述:
+========
   *) k8s版本: v1.27.1
   *) k8s集群环境示例展示.
 
-结构:
-====
+项目结构:
+========
   *) api: 各种资源对象的示例代码.
   *) plugin: 各种插件安装的示例代码.
   *) charts: helm的chart包示例代码.
 
-运行:
+镜像打包:
 ====
   *) 运行build.sh
   *) 镜像打包上传到指定仓库
-     docker build -t xxxxx.com/path/k8s-demo:v1
-     docker push xxxxx.com/path/k8s-demo:v1
+     docker build -t xxxxx.com/path/k8s-demo:tag
+     docker push xxxxx.com/path/k8s-demo:tag
      上面的xxxxx.com/path是存放镜像的仓库地址
