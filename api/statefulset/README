@@ -1,0 +1,9 @@
+### 使用
+
+```
+创建:
+kubectl apply -f test-statfulset.yaml
+
+删除:
+kubectl delete -f test-statfulset.yaml
+```

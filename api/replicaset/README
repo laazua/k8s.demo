@@ -1,0 +1,9 @@
+### 使用
+
+```
+使用:
+kubectl apply -f test-replicaset.yaml
+
+删除:
+kubectl delete -f test-replicaset.yaml
+```

@@ -1,0 +1,7 @@
+### ingress-nginx
+
+0x01) 代理: registry.k8s.io -> k8s.dockerproxy.com
+0x02) 安装: helm install -n ingress-nginx --create-namespace ingress-nginx ingress-nginx-4.8.4.tgz -f custom-values.yaml
+
+注意:
+  ingress-nginx要在calico部署好了之后才能部署成功!

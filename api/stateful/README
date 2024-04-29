@@ -1,0 +1,10 @@
+### 使用
+
+有状态应用部署示例
+```
+创建:
+kubectl apply -f .
+
+删除:
+kubectl delete -f .
+```

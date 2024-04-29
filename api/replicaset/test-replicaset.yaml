@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: test-k8s-demo-replicaset
+  labels:
+    app: test-k8s-demo-replicaset
+spec:
+  # 按你的实际情况修改副本数
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-k8s-demo-replicaset
+  template:
+    metadata:
+      labels:
+        app: test-k8s-demo-replicaset
+    spec:
+      containers:
+      - name: test-k8s-demo-replicaset
+        image: web-harbor.xxxxx.com/path/k8s-demo@sha256:d45cf3d9a16e770fc6065df1dfdf313dda1ea494b771b4d153fac8a5772462e3
+        ports:
+        - containerPort: 8889
+          hostPort: 8889

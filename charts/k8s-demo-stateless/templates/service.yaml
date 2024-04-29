@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: ClusterIP
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  # 这里的selector一定要与deployment资源定义spec.selector一致
+  selector:
+    app: {{ .Chart.Name }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8889

@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-k8s-demo-service
+  labels:
+    app: test-k8s-demo-service
+spec:
+  type: ClusterIP
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 8889
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-k8s-demo-statfulset
+spec:
+  selector:
+    matchLabels:
+      app: test-k8s-demo-service # 必须匹配 .spec.template.metadata.labels
+  serviceName: test-k8s-demo-service
+  replicas: 3 # 默认值是 1
+  minReadySeconds: 10 # 默认值是 0
+  template:
+    metadata:
+      labels:
+        app: test-k8s-demo-service # 必须匹配 .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: test-k8s-demo-statfulset
+        image: web-harbor.xxxxx.com/path/k8s-demo@sha256:d45cf3d9a16e770fc6065df1dfdf313dda1ea494b771b4d153fac8a5772462e3
+        ports:
+        - containerPort: 8889
+          name: http
+        volumeMounts:
+        - name: datapath
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: datapath
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: nfs-client  # k8s集群必须安装了此storegeClass
+      resources:
+        requests:
+          storage: 1Gi

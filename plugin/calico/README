@@ -1,0 +1,6 @@
+### calico 安装
+
+0x01) 下载: https://github.com/projectcalico/calico/blob/master/manifests/calico-typha.yaml
+0x02) mv calico-typha.yaml deploy.yaml
+0x03) 修改deploy.yaml中CALICO_IPV4POOL_CIDR对应的value为kubernetes的cluster-cidr IP
+0x04) kubeclt apply -f deploy.yaml

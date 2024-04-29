@@ -1,0 +1,11 @@
+### 使用
+
+```
+创建:
+kubectl apply -f test-claim.yaml
+kubectl apply -f test-daemonset.yaml
+
+删除:
+kubectl delete -f test-claim.yaml
+kubectl delete -f test-daemonset.yaml
+```

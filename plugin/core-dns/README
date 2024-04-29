@@ -1,0 +1,6 @@
+### core dns
+
+0x01) 下载: https://github.com/coredns/deployment/blob/master/kubernetes/coredns.yaml.sed
+0x02) mv coredns.yaml.sed deploy.yaml
+0x03) 修改deploy.yaml中CLUSTER_DNS_IP为kubernetes的cluster_dns IP
+0x04) kubectl apply -f deploy.yaml

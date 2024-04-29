@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-k8s-demo-deployment
+  labels:
+    app: test-k8s-demo-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: test-k8s-demo-deployment
+  template:
+    metadata:
+      labels:
+        app: test-k8s-demo-deployment
+    spec:
+      containers:
+      - name: test-k8s-demo-deployment
+        image: web-harbor.xxxxx.com/path/k8s-demo@sha256:d45cf3d9a16e770fc6065df1dfdf313dda1ea494b771b4d153fac8a5772462e3
+        ports:
+        - containerPort: 8889

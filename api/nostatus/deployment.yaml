@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-demo
+  labels:
+    app: k8s-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-demo
+  template:
+    metadata:
+      labels:
+        app: k8s-demo
+    spec:
+      containers:
+      - name: k8s-demo
+        image: web-harbor.xxxxx.com/path/k8s-demo@sha256:d45cf3d9a16e770fc6065df1dfdf313dda1ea494b771b4d153fac8a5772462e3
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        livenessProbe:
+          tcpSocket:
+            port: 8889
+          initialDelaySeconds: 20
+          timeoutSeconds: 20
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /hello
+            port: 8889
+          initialDelaySeconds: 20
+          timeoutSeconds: 20
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        ports:
+        - containerPort: 8889

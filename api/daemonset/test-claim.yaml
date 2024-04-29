@@ -1,0 +1,11 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: test-claim
+spec:
+  storageClassName: nfs-client  # k8s集群必须安装了此storegeClass
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi

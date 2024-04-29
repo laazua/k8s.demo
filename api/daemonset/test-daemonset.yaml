@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: test-k8s-demo-daemonset
+  namespace: default
+  labels:
+    app: test-k8s-demo-daemonset
+spec:
+  selector:
+    matchLabels:
+      name: test-k8s-demo-daemonset
+  template:
+    metadata:
+      labels:
+        name: test-k8s-demo-daemonset
+    spec:
+      tolerations:
+      # 这些容忍度设置是为了让该守护进程集在控制平面节点上运行
+      # 如果你不希望自己的控制平面节点运行 Pod，可以删除它们
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: test-k8s-demo-daemonset
+        image: web-harbor.xxxxx.com/path/k8s-demo@sha256:d45cf3d9a16e770fc6065df1dfdf313dda1ea494b771b4d153fac8a5772462e3
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        volumeMounts:
+        - name: datapath
+          mountPath: /app/data
+      # 可能需要设置较高的优先级类以确保 DaemonSet Pod 可以抢占正在运行的 Pod
+      # priorityClassName: important
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: datapath
+          persistentVolumeClaim:
+            claimName: test-claim  # test-claim.yaml中创建的资源名字 

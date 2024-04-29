@@ -1,0 +1,9 @@
+### 使用
+
+```
+使用:
+kubectl apply -f test-pod.yaml
+
+删除:
+kubectl delete -f test-pod.yaml
+```
