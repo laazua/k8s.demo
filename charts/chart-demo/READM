@@ -1,0 +1,10 @@
+### chart demo
+
+描述:
+  helm的chart模板语法练习
+
+打包:
+  helm package --version 0.0.1 .
+
+运行:
+  helm install chart-demo chart-demo-0.0.1.tgz -f custom-values.yaml --dry-run
