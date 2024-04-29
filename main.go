@@ -16,6 +16,7 @@ type Book struct {
 
 func main() {
 	router := mux.NewRouter()
+        router.HandleFunc("/test", healthTest).Methods("GET")
 	router.HandleFunc("/hello/{name}", helloDemo).Methods("GET")
 	router.HandleFunc("/tasks/{id}", tasksDemo).Methods("GET", "POST")
 	router.HandleFunc("/books/info", booksInfo).Methods("GET")
@@ -23,6 +24,10 @@ func main() {
 
         println("Listen On: 8889")
 	http.ListenAndServe(":8889", router)
+}
+
+func healthTest(w http.ResponseWriter, r *http.Request) {
+        w.Write([]byte("Health Test Success ..."))
 }
 
 func helloDemo(w http.ResponseWriter, r *http.Request) {
