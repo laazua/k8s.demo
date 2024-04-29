@@ -4,4 +4,4 @@ IngressClassName: nginx
 IngressDomain: k8s-demo.xxxxx.com
 
 Replicas: 2
-Image: web-harbor.xxxxx.com/public/k8s-demo@sha256:d45cf3d9a16e770fc6065df1dfdf313dda1ea494b771b4d153fac8a5772462e3
+Image: web-harbor.xxxxx.com/public/k8s-demo@sha256:aa25b85c7579d56071c5f8cb67572687194276ff76672c1587674b54e2256f47

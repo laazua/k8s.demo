@@ -6,6 +6,6 @@ if [ ! -d "output" ];then
 fi
 
 CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o k8s-demo . && \
-    cp k8s-demo config.yaml output && \
+    cp k8s-demo book.yaml output && \
     rm k8s-demo
 
