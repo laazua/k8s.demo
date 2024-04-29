@@ -1,3 +1,7 @@
+// 
+// 仅用于测试k8s资源对象的代码
+//
+
 package main
 
 import (
