@@ -1,0 +1,9 @@
+---
+
+IngressClassName: nginx
+IngressDomain: k8s-demo.xxxxx.com
+
+Replicas: 3
+Image: web-harbor.xxxxx.com/public/k8s-demo@sha256:0ba87b08c1b104940bdf4f70f92e4bec452fac533fe36fa5f6b19126ca6c1b3c
+StorageClassName: nfs-client
+

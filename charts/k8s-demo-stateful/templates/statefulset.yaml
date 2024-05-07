@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  serviceName: {{ .Chart.Name }}
+  replicas: {{ .Values.Replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      terminationGracePeriodSeconds: 1800
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.Image }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 7000
+          name: http-port
+        resources:
+          limits:
+            cpu: "500m"
+            memory: 1Gi
+          requests:
+            cpu: "500m"
+            memory: 1Gi
+        securityContext:
+          capabilities:
+            add:
+              - IPC_LOCK
+        livenessProbe:
+          tcpSocket:
+            port: 8889
+          initialDelaySeconds: 20
+          timeoutSeconds: 20
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /test
+            port: 8889
+          initialDelaySeconds: 20
+          timeoutSeconds: 20
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        ports:
+        - containerPort: 8889
+        volumeMounts:
+        - name: {{ .Chart.Name }}-data
+          mountPath: /app/config
+      
+  # 申请卷
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: {{ .Chart.Name }}-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+      storageClassName: {{ .Values.StorageClassName }}
+      volumeMode: Filesystem

@@ -15,6 +15,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: k8s-demo  # 这里的名字跟service.yaml中的metadata.name一直
+            name: k8s-demo  # 这里的名字跟service.yaml中的metadata.name一致
             port:
               number: 80
