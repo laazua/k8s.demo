@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-configmap
+data:
+  # 类文件键
+  file1.txt: |
+    this is file1.txt content.    
+  file2.txt: |
+    this is file2.txt content.

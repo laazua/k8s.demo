@@ -56,6 +56,20 @@ spec:
         volumeMounts:
         - name: {{ .Chart.Name }}-data
           mountPath: /app/config
+        - name: {{ .Chart.Name }}-files
+          mountPath: /app/files
+          readOnly: true
+      # configmap files mount to pod
+      volumes:
+      - name: {{ .Chart.Name }}-files
+        configMap:
+          name: {{ .Chart.Name }}-configmap
+          # 来自 ConfigMap 的一组键，将被创建为文件
+          items:
+          - key: "file1.txt"
+            path: "file1.txt"
+          - key: "file2.txt"
+            path: "file2.txt"
       
   # 申请卷
   volumeClaimTemplates:
@@ -71,3 +85,4 @@ spec:
           storage: 1Gi
       storageClassName: {{ .Values.StorageClassName }}
       volumeMode: Filesystem
+
