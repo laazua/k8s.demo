@@ -10,8 +10,9 @@
   *) charts: helm的chart包示例代码.
 
 [镜像打包]:
-  *) 运行build.sh
+  *) cd src && make
   *) 镜像打包上传到指定仓库
      docker build -t xxxxx.com/path/k8s-demo:tag
      docker push xxxxx.com/path/k8s-demo:tag
      上面的xxxxx.com/path是存放镜像的仓库地址
+  *) 清理编译文件: make clean
