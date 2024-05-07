@@ -1,0 +1,7 @@
+### 存储
+
+[repo]
+  *) https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
+
+[install]
+  *) helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner-4.8.18.tgz -f values.yaml --set nfs.server=nfsserver.com --set nfs.path=/sharepath
