@@ -6,6 +6,7 @@ package main
 
 import (
         "encoding/json"
+        "fmt"
 	"net/http"
 	"os"
 
@@ -25,6 +26,7 @@ func main() {
 	router.HandleFunc("/tasks/{id}", tasksDemo).Methods("GET", "POST")
 	router.HandleFunc("/books/info", booksInfo).Methods("GET")
 	router.HandleFunc("/books/{item}", booksItem).Methods("GET")
+        router.HandleFunc("/books/check", booksCheck).Methods("POST")
 
         println("Listen On: 8889")
 	http.ListenAndServe(":8889", router)
@@ -84,5 +86,13 @@ func booksInfo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Write([]byte("Book's introduction: "))
+        // 返回json数据
 	json.NewEncoder(w).Encode(book)
+}
+
+func booksCheck(w http.ResponseWriter, r *http.Request) {
+        var book Book
+        // 获取请求体的json数据
+        json.NewDecoder(r.Body).Decode(&book)
+        fmt.Fprintf(w, "name: %s, author: %s\n", book.Name, book.Author)
 }
