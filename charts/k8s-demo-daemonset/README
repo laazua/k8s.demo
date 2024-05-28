@@ -1,0 +1,10 @@
+### daemonset
+
+[说明]
+  *) daemonset适用于需要在整个集群的每个节点上运行特定副本的场景,以确保在各个节点上提供一致的服务和功能.
+
+[部署]
+  *) helm install k8s-demo-daemonset k8s-demo-daemonset
+
+[验证]
+  *) kubectl get pods -o wide -l app=k8s-demo-daemonset
