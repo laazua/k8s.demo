@@ -1,0 +1,16 @@
+namespace: default
+
+replicas: 2
+
+image:
+  repository: xxxxx.com/test/imux
+  tag: v1
+
+service:
+  port: 9990
+
+gateway:
+  class: istio
+  port: 9990
+
+env: production
