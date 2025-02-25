@@ -19,3 +19,4 @@
   *) 清理编译文件: make clean
   *) 备注: 或者使用podman进行镜像打包
      podman build -t xxxxx.com/path/k8s-demo:tag .
+
